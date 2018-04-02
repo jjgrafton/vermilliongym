@@ -1,0 +1,16 @@
+@mixin pokemonCircle {
+    width: 180px;
+    height: 180px;
+    margin-top: 30px;
+    background-color: #EBEBEB;
+    border-style: outset;
+    border-color: orange;
+    border-width: 15px;
+    border-radius: 50%;
+    margin-left: 60px;
+    margin-bottom: 30px;
+    background-size: cover;
+    -webkit-animation: rotation 2s infinite linear;
+}
+
+$cubic: cubic-bezier(0.785, 0.135, 0.15, 0.86);

@@ -1,0 +1,30 @@
+.circle {
+    @include pokemonCircle()
+}
+
+#oddishCircle {
+    @include pokemonCircle;
+    background-image: url("images/oddish.png");
+    
+    }
+  
+  #gloomCircle {
+    @include pokemonCircle();
+    background-image: url("images/gloom.png");
+   
+  }
+  
+  #weezingCircle {
+    @include pokemonCircle();
+    background-image: url("images/weezing.png");
+   
+  }
+  
+  @-webkit-keyframes rotation {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(359deg);
+    }
+  }
