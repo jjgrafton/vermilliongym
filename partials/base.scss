@@ -1,30 +1,58 @@
+@mixin pokemonCircle {
+  width: 180px;
+  height: 180px;
+  margin-top: 30px;
+  background-color: #EBEBEB;
+  border-style: outset;
+  border-color: orange;
+  border-width: 15px;
+  border-radius: 50%;
+  margin-left: 60px;
+  margin-bottom: 30px;
+  background-size: cover;
+  -webkit-animation: rotation 2s infinite linear;
+}
+
+$cubic: cubic-bezier(0.785, 0.135, 0.15, 0.86);
+
 .circle {
-    @include pokemonCircle()
+  @include pokemonCircle()
+}
+
+#pokeLogo {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  padding-top: 0;
+  margin-top: 0;
+  -moz-transform:scale(0.75);
+    -webkit-transform:scale(0.75);
+    transform:scale(0.75);
 }
 
 #oddishCircle {
-    @include pokemonCircle;
-    background-image: url("images/oddish.png");
-    
-    }
+  @include pokemonCircle;
+  background-image: url("images/oddish.png");
   
-  #gloomCircle {
-    @include pokemonCircle();
-    background-image: url("images/gloom.png");
-   
   }
-  
-  #weezingCircle {
-    @include pokemonCircle();
-    background-image: url("images/weezing.png");
-   
+
+#gloomCircle {
+  @include pokemonCircle();
+  background-image: url("images/gloom.png");
+ 
+}
+
+#weezingCircle {
+  @include pokemonCircle();
+  background-image: url("images/weezing.png");
+ 
+}
+
+@-webkit-keyframes rotation {
+  from {
+      -webkit-transform: rotate(0deg);
   }
-  
-  @-webkit-keyframes rotation {
-    from {
-        -webkit-transform: rotate(0deg);
-    }
-    to {
-        -webkit-transform: rotate(359deg);
-    }
+  to {
+      -webkit-transform: rotate(359deg);
   }
+}
