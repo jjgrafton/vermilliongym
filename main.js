@@ -32,7 +32,11 @@ window.onload = function (evt) {
         xhr.onload = function () {
           // notice that we are wrapping the data in the 'resolve' function, and this is the name of the parameter on line 19
           // store the character object to the local storage, in case of an error on a future request:
-          localStorage.setItem(characterName, xhr.responseText);
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            console.log('successful fetch to api');
+            localStorage.setItem(characterName, xhr.responseText);
+          }
+
           resolve(JSON.parse(xhr.responseText));
         };
         // this is an event-listener.  When the 'onerror' event fires, it means that there
@@ -173,9 +177,15 @@ window.onload = function (evt) {
   for (let i = 0; i < spinningButtons.length; i++) {
     const button = spinningButtons[i];
     button.addEventListener('click', () => {
+      // get the character name off of the button that was clicked:
       const characterName = button.getAttribute('data');
+      // get the character object:
+      const characterObject = JSON.parse(localStorage[characterName]);
+      console.log('characterObject in event listener: ', characterObject);
+
       // have do do this dynamically:
       const playerName = 'chuck' || 'professor';
+
       // in each button's event listener, we grab the character's name, and run
       // the render function on that character, in order to display it to the DOM:
       renderCharacterToFloatingDisplay(characterName, playerName);
