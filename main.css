@@ -1,4 +1,4 @@
-@import url("reset.css");
+/* @import url("reset.css"); */
 @import url("stats.css");
 
 body {
@@ -23,6 +23,14 @@ body {
   font-family: "Andale Mono", AndaleMono, monospace;
   color: #0081c6;
   text-align: center;
+  webkit-animation: glow 2s ease-in-out infinite;
+  animation: glow 2s ease-in-out infinite;
+}
+
+@keyframes glow {
+  50% {
+    box-shadow: 0 0 60px #ffff33;
+  }
 }
 
 #grimBox {
@@ -257,13 +265,16 @@ body {
 }
 
 .statsBox {
-  height: 200px;
-  width: 400px;
+  padding-top: 12px;
+  height: 250px;
+  width: 475px;
   border-radius: 25px;
   border-width: 10px;
   border-style: ridge;
   border-color: #f7af1d;
   background-color: white;
+  webkit-animation: glow 2s ease-in-out infinite;
+  animation: glow 2s ease-in-out infinite;
 }
 
 @-webkit-keyframes rotation {

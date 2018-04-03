@@ -3,20 +3,18 @@
   height: 100px;
   margin: 20px;
   margin-top: 0px;
-  background-color: #EBEBEB;
+  background-color: #ebebeb;
   border-style: ridge;
-  border-color: #0081C6;
+  border-color: #0081c6;
   border-width: 7px;
   border-radius: 50%;
   background-size: cover;
   -webkit-animation: rotation 2s infinite linear;
 }
 
-
 $cubic: cubic-bezier(0.785, 0.135, 0.15, 0.86);
 
-
-.flexContainer{
+.flexContainer {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -31,11 +29,17 @@ $cubic: cubic-bezier(0.785, 0.135, 0.15, 0.86);
   border-color: $color;
   border-radius: 25px;
   border-width: 5px;
-  font-family: "Andale Mono", AndaleMono,monospace;
-  color: #0081C6;
+  font-family: "Andale Mono", AndaleMono, monospace;
+  color: #0081c6;
   text-align: center;
+  webkit-animation: glow 2s ease-in-out infinite;
+  animation: glow 2s ease-in-out infinite;
+}
 
-
+@keyframes glow {
+  50% {
+    box-shadow: 0 0 60px #ffff33;
+  }
 }
 
 #grimBox {
@@ -75,44 +79,39 @@ $cubic: cubic-bezier(0.785, 0.135, 0.15, 0.86);
   width: 75px;
   margin-bottom: 0px;
   margin-left: 175px;
-  background-color: #F8F9FC;
+  background-color: #f8f9fc;
   border-radius: 25px;
   border-style: ridge;
-  border-color: #0081C6;
+  border-color: #0081c6;
   border-width: 7px;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: "Courier New", Courier, monospace;
   font-size: 50px;
   text-align: center;
   vertical-align: center;
-  color: #0081C6;
+  color: #0081c6;
   display: flex;
   align-items: center;
   justify-content: center;
-
 }
-
 
 .scoreBoxTwo {
   height: 75px;
   width: 75px;
   padding-top: 0px;
   margin-right: 175px;
-  background-color: #F8F9FC;
+  background-color: #f8f9fc;
   border-radius: 25px;
   border-style: ridge;
-  border-color: #0081C6;
+  border-color: #0081c6;
   border-width: 7px;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: "Courier New", Courier, monospace;
   font-size: 50px;
   text-align: center;
-  color: #0081C6;
+  color: #0081c6;
   display: flex;
   align-items: center;
   justify-content: center;
-
 }
-
-
 
 .pokemonContainer {
   display: flex;
@@ -123,24 +122,22 @@ $cubic: cubic-bezier(0.785, 0.135, 0.15, 0.86);
 #professorPokemon {
   display: flex;
   flex-direction: row;
-justify-content: space-evenly;}
+  justify-content: space-evenly;
+}
 
 #oddishCircle {
   @include pokemonCircle;
   background-image: url("images/oddish.png");
-
 }
 
 #gloomCircle {
   @include pokemonCircle;
   background-image: url("images/gloom.png");
-
 }
 
 #weezingCircle {
   @include pokemonCircle;
   background-image: url("images/weezing.png");
-
 }
 #chuckPokemon {
   display: flex;
@@ -151,68 +148,65 @@ justify-content: space-evenly;}
 #dragonairCircle {
   @include pokemonCircle;
   background-image: url("images/dragonair.jpg");
-  
-  }
+}
 
-  #butterfreeCircle {
-    @include pokemonCircle;
+#butterfreeCircle {
+  @include pokemonCircle;
   background-image: url("images/butterfree.jpg");
-  }
+}
 
-  #charmeleonCircle {
-    @include pokemonCircle;
+#charmeleonCircle {
+  @include pokemonCircle;
   background-image: url("images/charmeleon.jpg");
-  }
+}
 
-  .pokemonNames {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-  }
+.pokemonNames {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
 
-  .names {
-    font-size: 25px;
-    font-family: "Andale Mono", AndaleMono,monospace;
-    font-style: bold;
-    color: $color;
-    text-shadow: 2px 2px 4px #B8860B;
-    padding-top: 0px;
-    padding-bottom: 0px;
-    // padding-left: 200px;
-    overflow: hidden;
-    /* Ensures the content is not revealed until the animation */
-    border-right: .15em solid orange;
-    /* The typwriter cursor */
-    white-space: nowrap;
-    /* Keeps the content on a single line */
-    margin: 0 auto;
-    /* Gives that scrolling effect as the typing happens */
-    letter-spacing: .15em;
-    /* Adjust as needed */
-    animation: typing 3.5s steps(30, end),
-    blink-caret .75s step-end infinite;
-
+.names {
+  font-size: 25px;
+  font-family: "Andale Mono", AndaleMono, monospace;
+  font-style: bold;
+  color: $color;
+  text-shadow: 2px 2px 4px #b8860b;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  // padding-left: 200px;
+  overflow: hidden;
+  /* Ensures the content is not revealed until the animation */
+  border-right: 0.15em solid orange;
+  /* The typwriter cursor */
+  white-space: nowrap;
+  /* Keeps the content on a single line */
+  margin: 0 auto;
+  /* Gives that scrolling effect as the typing happens */
+  letter-spacing: 0.15em;
+  /* Adjust as needed */
+  animation: typing 3.5s steps(30, end), blink-caret 0.75s step-end infinite;
 }
 
 @keyframes typing {
-    from {
-        width: 0
-    }
-    to {
-        width: 100%
-    }
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
 }
 
 /* The typewriter cursor effect */
 
 @keyframes blink-caret {
-    from,
-    to {
-        border-color: transparent
-    }
-    50% {
-        border-color: orange;
-    }
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: orange;
+  }
 }
 
 .stats {
@@ -222,21 +216,22 @@ justify-content: space-evenly;}
 }
 
 .statsBox {
-  height: 200px;
+  height: 250px;
   width: 400px;
   border-radius: 25px;
   border-width: 10px;
   border-style: ridge;
   border-color: $color;
   background-color: white;
+  webkit-animation: glow 2s ease-in-out infinite;
+  animation: glow 2s ease-in-out infinite;
 }
- 
 
 @-webkit-keyframes rotation {
   from {
-      -webkit-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
   }
   to {
-      -webkit-transform: rotate(359deg);
+    -webkit-transform: rotate(359deg);
   }
 }
