@@ -195,8 +195,8 @@ window.onload = function (evt) {
 
       // format the character:
       const formattedCharacterObject = Character.prototype.makeCharacterInstance(characterObject);
-      console.log('playerName in event listener: ', playerName);
-      console.log('formattedCharacterObject in event listener: ', formattedCharacterObject);
+      // console.log('playerName in event listener: ', playerName);
+      // console.log('formattedCharacterObject in event listener: ', formattedCharacterObject);
       // in each button's event listener, we grab the character's name, and run
       // the render function on that character, in order to display it to the DOM:
       renderCharacterToFloatingDisplay(formattedCharacterObject, playerName);
@@ -206,26 +206,53 @@ window.onload = function (evt) {
 
   function renderCharacterToFloatingDisplay(characterObject, playerName) {
     // HERE, put function to remove previous character that was in the DOM:
+    let statsWrap;
+    let typeWrap;
+    if (playerName === 'professor') {
+      statsWrap = document.getElementById('professorStats');
+      typeWrap = document.getElementById('professorNames');
+    } else if (playerName === 'chuck') {
+      statsWrap = document.getElementById('chuckStats');
+      typeWrap = document.getElementById('chuckNames');
+    }
+
     // displayStats
     removeStats(playerName);
+    removeType();
+
+    const characterName = characterObject.name;
+    renderType(characterName);
     renderStats(characterObject, playerName);
 
     function removeStats(playerName) {
       // this code to select statsWrap is not DRY. re-factor later:
       let statsWrap;
+      let typeWrap;
       if (playerName === 'professor') {
         statsWrap = document.getElementById('professorStats');
+        typeWrap = document.getElementById('professorNames');
       } else if (playerName === 'chuck') {
         statsWrap = document.getElementById('chuckStats');
+        typeWrap = document.getElementById('chuckNames');
       }
       // setting the innerHTML of the statsWrap element to an empty string:
       statsWrap.innerHTML = '';
     }
+
+    function removeType(playerName) {
+      typeWrap.innerHTML = 'test';
+    }
+    function renderType(characterName) {
+      typeWrap.innerHTML = characterName
+      console.log('function addType: characterName: ', characterName);
+      console.log('function addType: typeWrap: ', typeWrap);
+    }
+
     function renderStats(characterObject, playerName) {
       const { stats } = characterObject;
-      console.log('stats: ', stats);
+      // console.log('stats: ', stats);
       const statNames = Object.keys(stats);
-      console.log('statNames: ', statNames);
+      // console.log('statNames: ', statNames);
 
       // GET THE STATS WRAP DIV FROM THE DOM
       // this code to select statsWrap is not DRY. re-factor later:
@@ -235,10 +262,10 @@ window.onload = function (evt) {
       } else if (playerName === 'chuck') {
         statsWrap = document.getElementById('chuckStats');
       }
-      console.log('statsWrap: ', statsWrap);
+      // console.log('statsWrap: ', statsWrap);
 
       statNames.forEach((stat) => {
-        console.log(stat);
+        // console.log(stat);
         // make a statWrap for each stat and add everything to it:
         const statWrap = document.createElement('div');
         statWrap.classList.add('statWrap');
@@ -253,7 +280,7 @@ window.onload = function (evt) {
         const statBarWrap = document.createElement('div');
         statBarWrap.classList.add('statBarWrap');
         // add boxes inside of the statBarWrap:
-        console.log('statBarWrap: ', statBarWrap);
+        // console.log('statBarWrap: ', statBarWrap);
         for (let i = 0; i < stats[stat]; i++) {
           // if (i < simpleStats[stat]) {
           setTimeout(() => {
