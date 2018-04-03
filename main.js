@@ -2,6 +2,7 @@
 // The comments above are just to remove error messages from my VS Code
 
 window.onload = function (evt) {
+  // adding comment to trouble-shoot gitHub
   // CHARACTER CLASS, USED FOR OUR POKEMON
   console.log('js file is connected and window loaded');
   // console.log('local storage: ', localStorage);
