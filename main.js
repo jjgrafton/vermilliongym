@@ -206,8 +206,20 @@ window.onload = function (evt) {
   function renderCharacterToFloatingDisplay(characterObject, playerName) {
     // HERE, put function to remove previous character that was in the DOM:
     // displayStats
+    removeStats(playerName);
     renderStats(characterObject, playerName);
 
+    function removeStats(playerName) {
+      // this code to select statsWrap is not DRY. re-factor later:
+      let statsWrap;
+      if (playerName === 'professor') {
+        statsWrap = document.getElementById('professorStats');
+      } else if (playerName === 'chuck') {
+        statsWrap = document.getElementById('chuckStats');
+      }
+      // setting the innerHTML of the statsWrap element to an empty string:
+      statsWrap.innerHTML = '';
+    }
     function renderStats(characterObject, playerName) {
       const { stats } = characterObject;
       console.log('stats: ', stats);
@@ -215,6 +227,7 @@ window.onload = function (evt) {
       console.log('statNames: ', statNames);
 
       // GET THE STATS WRAP DIV FROM THE DOM
+      // this code to select statsWrap is not DRY. re-factor later:
       let statsWrap;
       if (playerName === 'professor') {
         statsWrap = document.getElementById('professorStats');
@@ -223,7 +236,6 @@ window.onload = function (evt) {
       }
       console.log('statsWrap: ', statsWrap);
 
-      // start of pasted code here:
       statNames.forEach((stat) => {
         console.log(stat);
         // make a statWrap for each stat and add everything to it:
@@ -262,7 +274,6 @@ window.onload = function (evt) {
         // and end of loop:
         statsWrap.appendChild(statWrap);
       });
-      // start of original code here:
     }
     // render the stats:
   }
