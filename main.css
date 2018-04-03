@@ -1,0 +1,163 @@
+body {
+  background-color: #DC3737; }
+
+.flexContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; }
+
+#scoreBoxOne {
+  height: 100px;
+  width: 100px;
+  background-color: #F8F9FC;
+  border-radius: 25px;
+  border-style: ridge;
+  border-color: #0081C6;
+  border-width: 7px; }
+
+#scoreBoxTwo {
+  height: 100px;
+  width: 100px;
+  background-color: #F8F9FC;
+  border-radius: 25px;
+  border-style: ridge;
+  border-color: #0081C6;
+  border-width: 7px; }
+
+#professorPokemon {
+  display: flex;
+  flex-direction: row;
+  left: 0px; }
+
+#oddishCircle {
+  width: 100px;
+  height: 100px;
+  background-color: #EBEBEB;
+  border-style: ridge;
+  border-color: #0081C6;
+  border-width: 5px;
+  border-radius: 50%;
+  background-size: cover;
+  -webkit-animation: rotation 2s infinite linear;
+  background-image: url("images/oddish.png"); }
+
+#gloomCircle {
+  width: 100px;
+  height: 100px;
+  background-color: #EBEBEB;
+  border-style: ridge;
+  border-color: #0081C6;
+  border-width: 5px;
+  border-radius: 50%;
+  background-size: cover;
+  -webkit-animation: rotation 2s infinite linear;
+  background-image: url("images/gloom.png"); }
+
+#weezingCircle {
+  width: 100px;
+  height: 100px;
+  background-color: #EBEBEB;
+  border-style: ridge;
+  border-color: #0081C6;
+  border-width: 5px;
+  border-radius: 50%;
+  background-size: cover;
+  -webkit-animation: rotation 2s infinite linear;
+  background-image: url("images/weezing.png"); }
+
+#chuckPokemon {
+  display: flex;
+  flex-direction: row; }
+
+#dragonairCircle {
+  width: 100px;
+  height: 100px;
+  background-color: #EBEBEB;
+  border-style: ridge;
+  border-color: #0081C6;
+  border-width: 5px;
+  border-radius: 50%;
+  background-size: cover;
+  -webkit-animation: rotation 2s infinite linear;
+  background-image: url("images/dragonair.jpg"); }
+
+#butterfreeCircle {
+  width: 100px;
+  height: 100px;
+  background-color: #EBEBEB;
+  border-style: ridge;
+  border-color: #0081C6;
+  border-width: 5px;
+  border-radius: 50%;
+  background-size: cover;
+  -webkit-animation: rotation 2s infinite linear;
+  background-image: url("images/butterfree.jpg"); }
+
+#charmeleonCircle {
+  width: 100px;
+  height: 100px;
+  background-color: #EBEBEB;
+  border-style: ridge;
+  border-color: #0081C6;
+  border-width: 5px;
+  border-radius: 50%;
+  background-size: cover;
+  -webkit-animation: rotation 2s infinite linear;
+  background-image: url("images/charmeleon.jpg"); }
+
+@-webkit-keyframes rotation {
+  from {
+    -webkit-transform: rotate(0deg); }
+  to {
+    -webkit-transform: rotate(359deg); } }
+
+#pokeLogo {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  padding-top: 0;
+  margin-top: 0;
+  -moz-transform: scale(0.75);
+  -webkit-transform: scale(0.75);
+  transform: scale(0.75); }
+
+#vermillionHeader {
+  font-size: 70px;
+  font-family: 'Courier New', Courier, monospace;
+  font-style: bold;
+  color: #F7AF1D;
+  padding-top: 30px;
+  padding-bottom: 40px;
+  padding-left: 200px;
+  overflow: hidden;
+  /* Ensures the content is not revealed until the animation */
+  border-right: .15em solid orange;
+  /* The typwriter cursor */
+  white-space: nowrap;
+  /* Keeps the content on a single line */
+  margin: 0 auto;
+  /* Gives that scrolling effect as the typing happens */
+  letter-spacing: .15em;
+  /* Adjust as needed */
+  animation: typing 3.5s steps(30, end), blink-caret 0.75s step-end infinite; }
+
+@keyframes typing {
+  from {
+    width: 0; }
+  to {
+    width: 100%; } }
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+  from,
+  to {
+    border-color: transparent; }
+  50% {
+    border-color: orange; } }
+
+
+@-webkit-keyframes rotation {
+  from {
+    -webkit-transform: rotate(0deg); }
+  to {
+    -webkit-transform: rotate(359deg); } }
