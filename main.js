@@ -61,13 +61,16 @@ window.onload = function (evt) {
   }
   Character.prototype.apiURL = 'https://pokeapi.co/api/v2/pokemon';
   // since we are adding external gifs, we will store whichever gifs we are able to find here:
+  // #NOTE: paste the gif you want to use for your characters here:
   Character.prototype.gifs = {
-    dragonair: 'add gif',
-    charmeleon: 'add gif',
-    butterfree: 'add gif',
     weezing: 'add gif',
     oddish: 'add gif',
     gloom: 'add gif',
+    dragonair: 'http://www.pokestadium.com/sprites/xy/dragonair-2.gif',
+    butterfree:
+      'http://rs744.pbsrc.com/albums/xx87/jessstaardust/tumblr_n1234ahMHc1s2qnyjo1_250_zpsa8f9c122.gif~c200',
+    charmeleon:
+      'https://orig00.deviantart.net/5293/f/2016/030/b/7/charmeleon_gif_by_queenaries-d9px7h5.gif',
   };
 
   class Player {
