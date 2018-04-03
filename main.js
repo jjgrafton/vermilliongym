@@ -7,8 +7,6 @@ window.onload = function (evt) {
   // console.log('local storage: ', localStorage);
   // hard code our trainers in the local storage, because of "access-control-allow-origin" error:
 
-  const localDragonair = {};
-
   class Character {
     constructor(characterName, pic, gif, stats, abilities) {
       this.name = characterName;
@@ -33,15 +31,15 @@ window.onload = function (evt) {
         // has been a successful response:
         xhr.onload = function () {
           // notice that we are wrapping the data in the 'resolve' function, and this is the name of the parameter on line 19
-                    // store the character object to the local storage, in case of an error on a future request:
-                    localStorage.setItem(characterName, JSON.parse(xhr.responseText));
+          // store the character object to the local storage, in case of an error on a future request:
+          localStorage.setItem(characterName, xhr.responseText);
           resolve(JSON.parse(xhr.responseText));
         };
         // this is an event-listener.  When the 'onerror' event fires, it means that there
         // the response is an error
         xhr.onerror = function () {
           console.log('local storage in the error event: ', localStorage);
-          resolve(localStorage[characterName]);
+          resolve(JSON.parse(localStorage[characterName]));
           // because we are getting errors, if we get an error, we will instead find our character object in our local storage.
           // instead of rejecting the error, we are resolving the data on the local storage.
           // reject(xhr.statusText);
@@ -75,9 +73,6 @@ window.onload = function (evt) {
   // #NOTE: paste the gif you want to use for your characters here:
   Character.prototype.gifs = {
     weezing: 'add gif',
-
-
-    
     oddish: 'add gif',
     gloom: 'add gif',
     dragonair: 'http://www.pokestadium.com/sprites/xy/dragonair-2.gif',
@@ -93,8 +88,8 @@ window.onload = function (evt) {
       this.gym = {};
       this.characters = charactersArray;
     }
-  
-        // I think we can remove the 'loadGym function, because we now have the 'loadGymPromise' function:
+
+    // I think we can remove the 'loadGym function, because we now are using the 'loadGymPromise' function:
     loadGym(arrayOfCharacters) {
       const charactersArray = this.characters || arrayOfCharacters;
       const arrayOfPromises = [];
@@ -108,7 +103,9 @@ window.onload = function (evt) {
           arrayOfCharacterObjects.forEach((characterObject) => {
             this.gym[characterObject.name] = characterObject;
           });
-          console.log(`${this.name}'s gym: `, this.gym);
+          // console.log(`${this.name}'s gym: `, this.gym);
+
+          // console.log('local storage', localStorage);
         })
         .catch((err) => {
           console.log(`error caught in the loadGym promise chain: ${err}`);
@@ -130,7 +127,8 @@ window.onload = function (evt) {
             arrayOfCharacterObjects.forEach((characterObject) => {
               this.gym[characterObject.name] = characterObject;
             });
-            console.log(`${this.name}'s gym: `, this.gym);
+
+            console.log('localStorage in the loadGymPromse function: ', localStorage);
             resolve(this.gym);
           })
           .catch((err) => {
