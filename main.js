@@ -76,7 +76,7 @@ window.onload = function (evt) {
       this.gym = {};
       this.characters = charactersArray;
     }
-    //I think we can remove the 'loadGym function, because we now have the 'loadGymPromise' function:
+    // I think we can remove the 'loadGym function, because we now have the 'loadGymPromise' function:
     loadGym(arrayOfCharacters) {
       const charactersArray = this.characters || arrayOfCharacters;
       const arrayOfPromises = [];
@@ -129,18 +129,40 @@ window.onload = function (evt) {
 
   // promise chain to load both player's gym:
   chuck
-    .loadGymPromise()
+    .loadGymPromise() // loading Chuck's gym
     .then((gym) => {
       console.log('chucks gym:', gym);
-      return professorDoom.loadGymPromise();
+      return professorDoom.loadGymPromise(); // loading Professor Doom's gym
     })
     .then((gym) => {
       console.log('professor dooms gym:', gym);
 
-      // #JAMIE:  right here, is where we need to make the page active, because the Pokemon have all arrived and are in their trainer's gym
-      // maybe add class to make the icons start spinning.
+      // #NOTE-01:  right here, is where we need to make the page active, because the Pokemon have all arrived and are in their trainer's gym
+      // Make all spinning icons in the html have an initial opacity of 0.5 or something?
+      // In this part of the javascript, add a class to the icons that makes their opacity fade up and they start spinning?
     })
     .catch((err) => {
       console.log(`error caught in loadGymPromise chain: ${err}`);
     });
+
+  // #NOTE:
+  // After all of the above code has run, the page should now appear active (from the visual cues made at #NOTE-01)
+  // CODE FOR MANIPULATING AND RENDERING TO THE DOM:
+  // later, these functions can be added to a Display class
+
+  // select the spinning icons and add an 'click' event-listener to them:
+  /*
+  const dragonairButton = document.getElementById('   ');
+  const butterfreeButton = document.getElementById('   ');
+  const charmeleonButton = document.getElementById('   ');
+  const weezingButton = document.getElementById('   ');
+  const oddishButton = document.getElementById('   ');
+  const gloomButton = document.getElementById('   ');
+
+  //example:
+  dragonairButton.addEventListener('click', function() {
+        //remove whatever is in the display:
+        //add dragonair
+  });
+  */
 };
