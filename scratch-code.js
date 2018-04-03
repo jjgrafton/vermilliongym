@@ -39,3 +39,9 @@
 //   const gloom = new Character();
 //   console.log('Gloom: ', gloom);
 // });
+
+// here, we call the .loadGym function on each of the players:
+// this should fetch the pokemon objects (as promises), use the returned object to make instances
+// and store the pokemon instances to the 'gym' object of each player.
+// chuck.loadGym();
+// professorDoom.loadGym();

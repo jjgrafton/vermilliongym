@@ -76,6 +76,7 @@ window.onload = function (evt) {
       this.gym = {};
       this.characters = charactersArray;
     }
+    //I think we can remove the 'loadGym function, because we now have the 'loadGymPromise' function:
     loadGym(arrayOfCharacters) {
       const charactersArray = this.characters || arrayOfCharacters;
       const arrayOfPromises = [];
@@ -95,13 +96,51 @@ window.onload = function (evt) {
           console.log(`error caught in the loadGym promise chain: ${err}`);
         });
     }
+    // made load gym a promise too, so that we can do things after the gyms are loaded:
+    loadGymPromise(arrayOfCharacters) {
+      const charactersArray = this.characters || arrayOfCharacters;
+
+      return new Promise((resolve, reject) => {
+        const arrayOfPromises = [];
+        for (let i = 0; i < charactersArray.length; i++) {
+          const characterName = charactersArray[i];
+          const promise = Character.prototype.getCharacterPromise(characterName);
+          arrayOfPromises[i] = promise;
+        }
+        Promise.all(arrayOfPromises)
+          .then((arrayOfCharacterObjects) => {
+            arrayOfCharacterObjects.forEach((characterObject) => {
+              this.gym[characterObject.name] = characterObject;
+            });
+            // console.log(`${this.name}'s gym: `, this.gym);
+            resolve(this.gym);
+          })
+          .catch((err) => {
+            // console.log(`error caught in the loadGym promise chain: ${err}`);
+            reject(err);
+          });
+      });
+    }
   }
 
   // here we create our player instances, and pass an array of our pokemon names:
   const professorDoom = new Player('Professor Doom', ['weezing', 'oddish', 'gloom']);
   const chuck = new Player('Chuck', ['dragonair', 'butterfree', 'charmeleon']);
 
-  // here, we call the .loadGym function on each of the players:
-  chuck.loadGym();
-  professorDoom.loadGym();
+  // promise chain to load both player's gym:
+  chuck
+    .loadGymPromise()
+    .then((gym) => {
+      console.log('chucks gym:', gym);
+      return professorDoom.loadGymPromise();
+    })
+    .then((gym) => {
+      console.log('professor dooms gym:', gym);
+
+      // #JAMIE:  right here, is where we need to make the page active, because the Pokemon have all arrived and are in their trainer's gym
+      // maybe add class to make the icons start spinning.
+    })
+    .catch((err) => {
+      console.log(`error caught in loadGymPromise chain: ${err}`);
+    });
 };
