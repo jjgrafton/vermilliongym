@@ -247,6 +247,33 @@
 		"oF": 0,
 		"oS": 0,
 		"uL": 1
+		},
+	"\/pseudo-code.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 0,
+		"oAP": "\/pseudo-code-min.js",
+		"oF": 0,
+		"sC": 3,
+		"tS": 0
+		},
+	"\/scratch-code.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 0,
+		"oAP": "\/scratch-code-min.js",
+		"oF": 0,
+		"sC": 3,
+		"tS": 0
+		},
+	"\/temp-html.html": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 0,
+		"oAP": "\/temp-html.html",
+		"oF": 0
 		}
 	},
 "hooks": [
