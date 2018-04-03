@@ -1,30 +1,94 @@
-.circle {
-    @include pokemonCircle()
+@mixin pokemonCircle {
+  width: 100px;
+  height: 100px;
+  background-color: #EBEBEB;
+  border-style: ridge;
+  border-color: #0081C6;
+  border-width: 5px;
+  border-radius: 50%;
+  background-size: cover;
+  -webkit-animation: rotation 2s infinite linear;
+}
+
+
+$cubic: cubic-bezier(0.785, 0.135, 0.15, 0.86);
+
+
+.flexContainer{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#scoreBoxOne {
+  height: 100px;
+  width: 100px;
+  background-color: #F8F9FC;
+  border-radius: 25px;
+  border-style: ridge;
+  border-color: #0081C6;
+  border-width: 7px;
+}
+
+#scoreBoxTwo {
+  height: 100px;
+  width: 100px;
+  background-color: #F8F9FC;
+  border-radius: 25px;
+  border-style: ridge;
+  border-color: #0081C6;
+  border-width: 7px;
+}
+
+#professorPokemon {
+  display: flex;
+  flex-direction: row;
+  left: 0px;
 }
 
 #oddishCircle {
+  @include pokemonCircle;
+  background-image: url("images/oddish.png");
+
+}
+
+#gloomCircle {
+  @include pokemonCircle;
+  background-image: url("images/gloom.png");
+
+}
+
+#weezingCircle {
+  @include pokemonCircle;
+  background-image: url("images/weezing.png");
+
+}
+#chuckPokemon {
+  display: flex;
+  flex-direction: row;
+}
+
+#dragonairCircle {
+  @include pokemonCircle;
+  background-image: url("images/dragonair.jpg");
+  
+  }
+
+  #butterfreeCircle {
     @include pokemonCircle;
-    background-image: url("images/oddish.png");
-    
-    }
-  
-  #gloomCircle {
-    @include pokemonCircle();
-    background-image: url("images/gloom.png");
-   
+  background-image: url("images/butterfree.jpg");
   }
-  
-  #weezingCircle {
-    @include pokemonCircle();
-    background-image: url("images/weezing.png");
-   
+
+  #charmeleonCircle {
+    @include pokemonCircle;
+  background-image: url("images/charmeleon.jpg");
   }
-  
-  @-webkit-keyframes rotation {
-    from {
-        -webkit-transform: rotate(0deg);
-    }
-    to {
-        -webkit-transform: rotate(359deg);
-    }
+
+@-webkit-keyframes rotation {
+  from {
+      -webkit-transform: rotate(0deg);
   }
+  to {
+      -webkit-transform: rotate(359deg);
+  }
+}
