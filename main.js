@@ -90,10 +90,6 @@ window.onload = function (evt) {
       this.gym = {};
       this.characters = charactersArray;
     }
-<<<<<<< HEAD
-=======
-
->>>>>>> c42146d6dabf502494cf71b27324da73f6b983ed
     // I think we can remove the 'loadGym function, because we now have the 'loadGymPromise' function:
     loadGym(arrayOfCharacters) {
       const charactersArray = this.characters || arrayOfCharacters;
