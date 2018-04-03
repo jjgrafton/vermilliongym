@@ -203,13 +203,21 @@ window.onload = function (evt) {
     });
   }
 
-  function renderCharacterToFloatingDisplay(characterName, playerName) {
+  function renderCharacterToFloatingDisplay(characterObject, playerName) {
     // HERE, put function to remove previous character that was in the DOM:
     // displayStats
+    renderStats(characterObject, playerName);
 
+    function renderStats(characterObject, playerName) {
+      let statsContainer;
+      if (playerName === 'professor') {
+        statsContainer = document.getElementById('professorStats');
+      } else if (playerName === 'chuck') {
+        statsContainer = document.getElementById('chuckStats');
+      }
+
+      console.log('statsContainer: ', statsContainer);
+    }
     // render the stats:
-    const professorStatsContainer = document.getElementsByClassName('professorStats')[0];
-    const chuckStatsContainer = document.getElementsByClassName('chuckStats')[0];
-    console.log(professorStatsContainer, chuckStatsContainer);
   }
 };
