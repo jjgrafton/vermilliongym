@@ -9,6 +9,16 @@
 	],
 "creatorBuild": "26330",
 "files": {
+	"\/animate.css": {
+		"aP": 1,
+		"bl": 0,
+		"ft": 16,
+		"ma": 0,
+		"oA": 0,
+		"oAP": "\/animate-min.css",
+		"oF": 0,
+		"oS": 3
+		},
 	"\/images\/butterfree.jpg": {
 		"ft": 16384,
 		"iS": 28460,
@@ -258,6 +268,16 @@
 		"sC": 3,
 		"tS": 0
 		},
+	"\/reset.css": {
+		"aP": 1,
+		"bl": 0,
+		"ft": 16,
+		"ma": 0,
+		"oA": 0,
+		"oAP": "\/reset-min.css",
+		"oF": 0,
+		"oS": 3
+		},
 	"\/scratch-code.js": {
 		"ft": 64,
 		"ma": 0,
@@ -267,6 +287,16 @@
 		"oF": 0,
 		"sC": 3,
 		"tS": 0
+		},
+	"\/stats.css": {
+		"aP": 1,
+		"bl": 0,
+		"ft": 16,
+		"ma": 0,
+		"oA": 0,
+		"oAP": "\/stats-min.css",
+		"oF": 0,
+		"oS": 3
 		},
 	"\/temp-html.html": {
 		"cB": 0,
