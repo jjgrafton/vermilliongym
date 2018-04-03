@@ -32,7 +32,10 @@ window.onload = function (evt) {
         xhr.onload = function () {
           // notice that we are wrapping the data in the 'resolve' function, and this is the name of the parameter on line 19
           // store the character object to the local storage, in case of an error on a future request:
-          localStorage.setItem(characterName, xhr.responseText);
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            console.log('successful fetch to api');
+            localStorage.setItem(characterName, xhr.responseText);
+          }
           resolve(JSON.parse(xhr.responseText));
         };
         // this is an event-listener.  When the 'onerror' event fires, it means that there
@@ -128,7 +131,7 @@ window.onload = function (evt) {
               this.gym[characterObject.name] = characterObject;
             });
 
-            console.log('localStorage in the loadGymPromse function: ', localStorage);
+            // console.log('localStorage in the loadGymPromse function: ', localStorage);
             resolve(this.gym);
           })
           .catch((err) => {
@@ -148,13 +151,12 @@ window.onload = function (evt) {
   // promise chain to load both player's gym:
   chuck
     .loadGymPromise() // loading Chuck's gym
+    .then(gym =>
+        // console.log('chucks gym:', gym);
+        professorDoom.loadGymPromise(), // loading Professor Doom's gym
+    )
     .then((gym) => {
-      console.log('chucks gym:', gym);
-      return professorDoom.loadGymPromise(); // loading Professor Doom's gym
-    })
-    .then((gym) => {
-      console.log('professor dooms gym:', gym);
-
+      // console.log('professor dooms gym:', gym);
       // #NOTE-01:  right here, is where we need to make the page active, because the Pokemon have all arrived and are in their trainer's gym
       // Make all spinning icons in the html have an initial opacity of 0.5 or something?
       // In this part of the javascript, add a class to the icons that makes their opacity fade up and they start spinning?
@@ -173,23 +175,106 @@ window.onload = function (evt) {
   for (let i = 0; i < spinningButtons.length; i++) {
     const button = spinningButtons[i];
     button.addEventListener('click', () => {
+      // get the character name off of the button that was clicked:
       const characterName = button.getAttribute('data');
-      // have do do this dynamically:
-      const playerName = 'chuck' || 'professor';
+      // get the character object from local storage, if it exists:
+      let characterObject = JSON.parse(localStorage[characterName]);
+      // console.log('characterObject in event listener: ', characterObject);
+      let playerName;
+      // see which trainer owns this character:
+      if (chuck.characters.includes(characterName)) {
+        // console.log('this character belongs to CHUCK');
+        playerName = 'chuck';
+        characterObject = characterObject || chuck.gym[characterName];
+      } else if (professorDoom.characters.includes(characterName)) {
+        // console.log('this character belongs to the professor');
+        playerName = 'professor';
+        characterObject = characterObject || professorDoom.gym[characterName];
+      }
+
+      // format the character:
+      const formattedCharacterObject = Character.prototype.makeCharacterInstance(characterObject);
+      console.log('playerName in event listener: ', playerName);
+      console.log('formattedCharacterObject in event listener: ', formattedCharacterObject);
       // in each button's event listener, we grab the character's name, and run
       // the render function on that character, in order to display it to the DOM:
-      renderCharacterToFloatingDisplay(characterName, playerName);
+      renderCharacterToFloatingDisplay(formattedCharacterObject, playerName);
       // THIS is where we randomly select one of the other Trainer's pokemon, to display it, as well.
     });
   }
 
-  function renderCharacterToFloatingDisplay(characterName, playerName) {
-    // HERE, put function to remove previous character that was int eh DOM:
+  function renderCharacterToFloatingDisplay(characterObject, playerName) {
+    // HERE, put function to remove previous character that was in the DOM:
     // displayStats
+    removeStats(playerName);
+    renderStats(characterObject, playerName);
 
+    function removeStats(playerName) {
+      // this code to select statsWrap is not DRY. re-factor later:
+      let statsWrap;
+      if (playerName === 'professor') {
+        statsWrap = document.getElementById('professorStats');
+      } else if (playerName === 'chuck') {
+        statsWrap = document.getElementById('chuckStats');
+      }
+      // setting the innerHTML of the statsWrap element to an empty string:
+      statsWrap.innerHTML = '';
+    }
+    function renderStats(characterObject, playerName) {
+      const { stats } = characterObject;
+      console.log('stats: ', stats);
+      const statNames = Object.keys(stats);
+      console.log('statNames: ', statNames);
+
+      // GET THE STATS WRAP DIV FROM THE DOM
+      // this code to select statsWrap is not DRY. re-factor later:
+      let statsWrap;
+      if (playerName === 'professor') {
+        statsWrap = document.getElementById('professorStats');
+      } else if (playerName === 'chuck') {
+        statsWrap = document.getElementById('chuckStats');
+      }
+      console.log('statsWrap: ', statsWrap);
+
+      statNames.forEach((stat) => {
+        console.log(stat);
+        // make a statWrap for each stat and add everything to it:
+        const statWrap = document.createElement('div');
+        statWrap.classList.add('statWrap');
+        // statWrap.setAttribute('id', `${stat}Wrap`);
+        statWrap.setAttribute('id', 'statTitle');
+
+        const statLabel = document.createElement('div');
+        statLabel.setAttribute('id', 'statLabel');
+        statLabel.innerHTML = `${stat}:  `;
+        statWrap.appendChild(statLabel);
+
+        const statBarWrap = document.createElement('div');
+        statBarWrap.classList.add('statBarWrap');
+        // add boxes inside of the statBarWrap:
+        console.log('statBarWrap: ', statBarWrap);
+        for (let i = 0; i < stats[stat]; i++) {
+          // if (i < simpleStats[stat]) {
+          setTimeout(() => {
+            const statBox = document.createElement('div');
+            statBox.classList.add('statBox');
+            statBarWrap.appendChild(statBox);
+            if (i === stats[stat] - 1) {
+              setTimeout(() => {
+                const statNumberBox = document.createElement('div');
+                statNumberBox.classList.add('statNumberBox');
+                statNumberBox.innerHTML = stats[stat];
+                statBarWrap.appendChild(statNumberBox);
+              }, 20);
+            }
+          }, i * 20);
+          // }
+          statWrap.appendChild(statBarWrap);
+        }
+        // and end of loop:
+        statsWrap.appendChild(statWrap);
+      });
+    }
     // render the stats:
-    const professorStatsContainer = document.getElementsByClassName('professorStats')[0];
-    const chuckStatsContainer = document.getElementsByClassName('chuckStats')[0];
-    console.log(professorStatsContainer, chuckStatsContainer);
   }
 };
