@@ -243,7 +243,8 @@ window.onload = function (evt) {
       typeWrap.innerHTML = 'test';
     }
     function renderType(characterName) {
-      typeWrap.innerHTML = characterName
+      typeWrap.innerHTML = characterName;
+      typeWrap.classList.add('textAnimation');
       console.log('function addType: characterName: ', characterName);
       console.log('function addType: typeWrap: ', typeWrap);
     }
