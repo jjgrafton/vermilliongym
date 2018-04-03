@@ -79,6 +79,7 @@ window.onload = function (evt) {
       this.gym = {};
       this.characters = charactersArray;
     }
+
     // I think we can remove the 'loadGym function, because we now have the 'loadGymPromise' function:
     loadGym(arrayOfCharacters) {
       const charactersArray = this.characters || arrayOfCharacters;
@@ -115,7 +116,7 @@ window.onload = function (evt) {
             arrayOfCharacterObjects.forEach((characterObject) => {
               this.gym[characterObject.name] = characterObject;
             });
-            // console.log(`${this.name}'s gym: `, this.gym);
+            console.log(`${this.name}'s gym: `, this.gym);
             resolve(this.gym);
           })
           .catch((err) => {
@@ -129,6 +130,8 @@ window.onload = function (evt) {
   // here we create our player instances, and pass an array of our pokemon names:
   const professorDoom = new Player('Professor Doom', ['weezing', 'oddish', 'gloom']);
   const chuck = new Player('Chuck', ['dragonair', 'butterfree', 'charmeleon']);
+
+  // #Jamie:  you can now access the Pokemon objects with chuck.gym['dragonair'], professorDoojm
 
   // promise chain to load both player's gym:
   chuck
@@ -154,18 +157,27 @@ window.onload = function (evt) {
   // later, these functions can be added to a Display class
 
   // select the spinning icons and add an 'click' event-listener to them:
-  /*
-  const dragonairButton = document.getElementById('   ');
-  const butterfreeButton = document.getElementById('   ');
-  const charmeleonButton = document.getElementById('   ');
-  const weezingButton = document.getElementById('   ');
-  const oddishButton = document.getElementById('   ');
-  const gloomButton = document.getElementById('   ');
+  const spinningButtons = document.getElementsByClassName('spinningButton');
+  for (let i = 0; i < spinningButtons.length; i++) {
+    const button = spinningButtons[i];
+    button.addEventListener('click', () => {
+      const characterName = button.getAttribute('data');
+      // have do do this dynamically:
+      const playerName = 'chuck' || 'professor';
+      // in each button's event listener, we grab the character's name, and run
+      // the render function on that character, in order to display it to the DOM:
+      renderCharacterToFloatingDisplay(characterName, playerName);
+      // THIS is where we randomly select one of the other Trainer's pokemon, to display it, as well.
+    });
+  }
 
-  //example:
-  dragonairButton.addEventListener('click', function() {
-        //remove whatever is in the display:
-        //add dragonair
-  });
-  */
+  function renderCharacterToFloatingDisplay(characterName, playerName) {
+    // HERE, put function to remove previous character that was int eh DOM:
+    // displayStats
+
+    // render the stats:
+    const professorStatsContainer = document.getElementsByClassName('professorStats')[0];
+    const chuckStatsContainer = document.getElementsByClassName('chuckStats')[0];
+    console.log(professorStatsContainer, chuckStatsContainer);
+  }
 };
