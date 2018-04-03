@@ -5,11 +5,15 @@ window.onload = function (evt) {
   // TRAINER CLASS
 
   class Character {
-    constructor(characterName) {
+    constructor(characterName, pic, gif, stats, abilities) {
       this.name = characterName;
+      this.pic = pic;
+      this.gif = gif;
+      this.stats = stats;
+      this.abilities = abilities;
     }
-    getCharacterPromise() {
-      const endpoint = this.name;
+    getCharacterPromise(characterName) {
+      const endpoint = characterName || this.name;
       return new Promise((resolve, reject) => {
         const xhr = new XMLHttpRequest();
         xhr.open('GET', `${this.apiURL}/${endpoint}/`);
@@ -22,53 +26,94 @@ window.onload = function (evt) {
         };
       });
     }
+    makeCharacterInstance(characterObject, gif = 'no gif') {
+      // take all of the data on the object and format it in a clean, simple way, in order to pass
+      // what we need to our contructor function:
+      console.log(characterObject);
+      // get the character name:
+      const characterName = characterObject.name;
+      // re-format the stats into an object, using the reduce method:
+      const reformattedStats = characterObject.stats.reduce((reformatted, stat) => {
+        reformatted[stat.stat.name] = stat.base_stat;
+        return reformatted;
+      }, {});
+      const reformattedAbilities = characterObject.abilities.reduce((arr, ability, index) => {
+        arr[index] = ability.ability.name;
+        return arr;
+      }, []);
+      console.log('reformattedAbilities: ', reformattedAbilities);
+      const defaultPic = characterObject.sprites.front_default;
+      console.log('reformatted stats: ', reformattedStats);
+      console.log('characterName: ', characterName);
+      const character = new Character(
+        characterName,
+        defaultPic,
+        gif,
+        reformattedStats,
+        reformattedAbilities,
+      );
+      console.log('Character Instance: ', character);
+    }
   }
   Character.prototype.apiURL = 'https://pokeapi.co/api/v2/pokemon';
-
   //   Pokemon names: Oddish, Gloom and Weezing
-  const dragonair = new Character('dragonair');
-  const getDragonair = dragonair.getCharacterPromise();
-  getDragonair.then((character) => {
-    console.log(character);
-  });
 
-  const butterfree = new Character('butterfree');
-  const getButterfree = butterfree.getCharacterPromise();
-  getButterfree.then((character) => {
-    console.log(character);
-  });
+  // Chuck's Pokemon:
+  // const dragonair = new Character('dragonair');
+  // const getDragonair = dragonair.getCharacterPromise();
+  // getDragonair.then((character) => {
+  //   console.log(character);
+  // });
+  // const butterfree = new Character('butterfree');
+  // const getButterfree = butterfree.getCharacterPromise();
+  // getButterfree.then((character) => {
+  //   console.log(character);
+  // });
+  // const charmeleon = new Character('charmeleon');
+  // const getCharmeleon = charmeleon.getCharacterPromise();
+  // getCharmeleon.then((character) => {
+  //   console.log(character);
+  // });
 
-  const charmeleon = new Character('charmeleon');
-  const getCharmeleon = charmeleon.getCharacterPromise();
-  getCharmeleon.then((character) => {
-    console.log(character);
-  });
+  // Professor Gloom's Pokemon:
 
-  const oddish = new Character('oddish');
-  getOddish = oddish.getCharacterPromise();
+  getOddish = Character.prototype.getCharacterPromise('oddish');
   getOddish.then((character) => {
-    console.log(character);
+    // const oddish = Character.prototype.makeCharacterInstance(character);
+    const gif = 'add gif URL here';
+    Character.prototype.makeCharacterInstance(character, gif);
   });
+  // const weezing = new Character('weezing');
+  // getWeezing = weezing.getCharacterPromise();
+  // getWeezing.then((character) => {
+  //   console.log(character);
+  // });
 
-  const weezing = new Character('weezing');
-  getWeezing = weezing.getCharacterPromise();
-  getWeezing.then((character) => {
-    console.log(character);
-  });
-
-  const gloom = new Character('gloom');
-  getGloom = gloom.getCharacterPromise();
-  getGloom.then((character) => {
-    console.log(character);
-  });
+  // getGloom = Character.prototype.getCharacterPromise();
+  // getGloom.then((character) => {
+  //   const gloom = new Character();
+  //   console.log('Gloom: ', gloom);
+  // });
 
   class Player {
     constructor(playerName) {
       this.name = playerName;
       this.gym = {};
     }
-    loadCharactersToGym(characterArray) {}
+    loadGym(arrayOfCharacters) {
+      const arrayOfPromises = [];
+      for (let i = 0; i < arrayOfCharacters.length; i++) {
+        const characterName = arrayOfCharacters[i];
+        const promise = Character.prototype.getCharacterPromise(characterName);
+        arrayOfPromises[i] = promise;
+      }
+    }
   }
+
+  // how to do async "when" the charactersLoaded === 6 ?
+  const display = {
+    charactersLoaded: 0,
+  };
 
   const professorDoom = new Player('Professor Doom');
   const chuck = new Player('Chuck');
