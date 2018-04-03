@@ -18,45 +18,73 @@
             <div id="pokeLogo">
                 <img src="images/pokemon-logo-vector.png" alt="Pokemon Logo">
             </div>
-            <div id="vermillionHeader">
+            <div id="vermillionHeader" class="shadow">
                 Vermillion Gym
             </div>
         </div>
 
-        <!-- Creating score boxes -->
         <div class="row">
             <div class="flexContainer">
+                <div id="grimName">
+                    Professor Grim
+                </div>
+                <div id="chuckName">
+                    Chuck
+                </div>
+            </div>
+
+        </div>
+
+    <!-- Creating score boxes -->
+    <div class="row">
+        <div class="scoreContainer">
                 <div id="scoreBoxOne">
-
+                    <p class="scores" id="professorScore"></p>
                 </div>
 
-                <div id="scoreBoxTwo">
-
-                </div>
+            <div id="scoreBoxTwo">
+                    <p class="scores" id="chuckScore"></p>
+            </div>
 
             </div>
         </div>
 
-        <div class="row">
-            <div class="flexContainer">
-                <div id="professorPokemon">
-                    <div id="oddishCircle"></div>
-                    <div id="gloomCircle"></div>
-                    <div id="weezingCircle"></div>
-                </div>
-
-                <div id="chuckPokemon">
-                    <div id="dragonairCircle"></div>
-                    <div id="butterfreeCircle"></div>
-                    <div id="charmeleonCircle"></div>
-                </div>
-
-
-
-
+    <div class="row">
+        <div class="pokemonContainer">
+            <div id="professorPokemon">
+                    <div id="oddishCircle" data="oddish"></div>
+                    <div id="gloomCircle" data="gloom"></div>
+                    <div id="weezingCircle" data="weezing"></div>
             </div>
 
+            <div id="chuckPokemon">
+                <div id="dragonairCircle" data="dragonair"></div>
+                <div id="butterfreeCircle" data="butterfree"></div>
+                <div id="charmeleonCircle" data="charmeleon"></div>
+            </div>
+        </div>
+    </div>
 
+    <div class="row">
+        <div class="pokemonNames">
+            <div id="professorNames"><p class="names">Placeholder</p></div>
+            <div id="chuckNames"><p class="names">Placeholder</p></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="stats">
+            <div id="professorStats" class="statsBox"></div>
+            <div id="chuckStats" class="statsBox"></div>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="gifs">
+            <div id="professorGifs"></div>
+            <div id="chuckGifs"></div>
+        </div>
 
 
         </div>

@@ -61,13 +61,16 @@ window.onload = function (evt) {
   }
   Character.prototype.apiURL = 'https://pokeapi.co/api/v2/pokemon';
   // since we are adding external gifs, we will store whichever gifs we are able to find here:
+  // #NOTE: paste the gif you want to use for your characters here:
   Character.prototype.gifs = {
-    dragonair: 'add gif',
-    charmeleon: 'add gif',
-    butterfree: 'add gif',
     weezing: 'add gif',
     oddish: 'add gif',
     gloom: 'add gif',
+    dragonair: 'http://www.pokestadium.com/sprites/xy/dragonair-2.gif',
+    butterfree:
+      'http://rs744.pbsrc.com/albums/xx87/jessstaardust/tumblr_n1234ahMHc1s2qnyjo1_250_zpsa8f9c122.gif~c200',
+    charmeleon:
+      'https://orig00.deviantart.net/5293/f/2016/030/b/7/charmeleon_gif_by_queenaries-d9px7h5.gif',
   };
 
   class Player {
@@ -76,6 +79,10 @@ window.onload = function (evt) {
       this.gym = {};
       this.characters = charactersArray;
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> c42146d6dabf502494cf71b27324da73f6b983ed
     // I think we can remove the 'loadGym function, because we now have the 'loadGymPromise' function:
     loadGym(arrayOfCharacters) {
       const charactersArray = this.characters || arrayOfCharacters;
@@ -112,7 +119,7 @@ window.onload = function (evt) {
             arrayOfCharacterObjects.forEach((characterObject) => {
               this.gym[characterObject.name] = characterObject;
             });
-            // console.log(`${this.name}'s gym: `, this.gym);
+            console.log(`${this.name}'s gym: `, this.gym);
             resolve(this.gym);
           })
           .catch((err) => {
@@ -127,20 +134,53 @@ window.onload = function (evt) {
   const professorDoom = new Player('Professor Doom', ['weezing', 'oddish', 'gloom']);
   const chuck = new Player('Chuck', ['dragonair', 'butterfree', 'charmeleon']);
 
+  // #Jamie:  you can now access the Pokemon objects with chuck.gym['dragonair'], professorDoojm
+
   // promise chain to load both player's gym:
   chuck
-    .loadGymPromise()
+    .loadGymPromise() // loading Chuck's gym
     .then((gym) => {
       console.log('chucks gym:', gym);
-      return professorDoom.loadGymPromise();
+      return professorDoom.loadGymPromise(); // loading Professor Doom's gym
     })
     .then((gym) => {
       console.log('professor dooms gym:', gym);
 
-      // #JAMIE:  right here, is where we need to make the page active, because the Pokemon have all arrived and are in their trainer's gym
-      // maybe add class to make the icons start spinning.
+      // #NOTE-01:  right here, is where we need to make the page active, because the Pokemon have all arrived and are in their trainer's gym
+      // Make all spinning icons in the html have an initial opacity of 0.5 or something?
+      // In this part of the javascript, add a class to the icons that makes their opacity fade up and they start spinning?
     })
     .catch((err) => {
       console.log(`error caught in loadGymPromise chain: ${err}`);
     });
+
+  // #NOTE:
+  // After all of the above code has run, the page should now appear active (from the visual cues made at #NOTE-01)
+  // CODE FOR MANIPULATING AND RENDERING TO THE DOM:
+  // later, these functions can be added to a Display class
+
+  // select the spinning icons and add an 'click' event-listener to them:
+  const spinningButtons = document.getElementsByClassName('spinningButton');
+  for (let i = 0; i < spinningButtons.length; i++) {
+    const button = spinningButtons[i];
+    button.addEventListener('click', () => {
+      const characterName = button.getAttribute('data');
+      // have do do this dynamically:
+      const playerName = 'chuck' || 'professor';
+      // in each button's event listener, we grab the character's name, and run
+      // the render function on that character, in order to display it to the DOM:
+      renderCharacterToFloatingDisplay(characterName, playerName);
+      // THIS is where we randomly select one of the other Trainer's pokemon, to display it, as well.
+    });
+  }
+
+  function renderCharacterToFloatingDisplay(characterName, playerName) {
+    // HERE, put function to remove previous character that was int eh DOM:
+    // displayStats
+
+    // render the stats:
+    const professorStatsContainer = document.getElementsByClassName('professorStats')[0];
+    const chuckStatsContainer = document.getElementsByClassName('chuckStats')[0];
+    console.log(professorStatsContainer, chuckStatsContainer);
+  }
 };

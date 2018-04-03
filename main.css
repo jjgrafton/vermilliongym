@@ -4,11 +4,27 @@ body {
 .flexContainer {
   display: flex;
   flex-direction: row;
+  justify-content: space-around; }
+
+#grimName {
+  font-family: 'Courier New', Courier, monospace;
+  color: #F7AF1D;
+  font-size: 20px; }
+
+#chuckName {
+  font-family: 'Courier New', Courier, monospace;
+  color: #F7AF1D;
+  font-size: 20px; }
+
+.scoreContainer {
+  display: flex;
+  flex-direction: row;
   justify-content: space-between; }
 
 #scoreBoxOne {
-  height: 100px;
-  width: 100px;
+  height: 75px;
+  width: 75px;
+  padding-top: 0px;
   background-color: #F8F9FC;
   border-radius: 25px;
   border-style: ridge;
@@ -16,22 +32,29 @@ body {
   border-width: 7px; }
 
 #scoreBoxTwo {
-  height: 100px;
-  width: 100px;
+  height: 75px;
+  width: 75px;
+  padding-top: 0px;
   background-color: #F8F9FC;
   border-radius: 25px;
   border-style: ridge;
   border-color: #0081C6;
   border-width: 7px; }
 
+.pokemonContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; }
+
 #professorPokemon {
   display: flex;
   flex-direction: row;
-  left: 0px; }
+  justify-content: space-evenly; }
 
 #oddishCircle {
   width: 100px;
   height: 100px;
+  margin: 20px;
   background-color: #EBEBEB;
   border-style: ridge;
   border-color: #0081C6;
@@ -44,6 +67,7 @@ body {
 #gloomCircle {
   width: 100px;
   height: 100px;
+  margin: 20px;
   background-color: #EBEBEB;
   border-style: ridge;
   border-color: #0081C6;
@@ -56,6 +80,7 @@ body {
 #weezingCircle {
   width: 100px;
   height: 100px;
+  margin: 20px;
   background-color: #EBEBEB;
   border-style: ridge;
   border-color: #0081C6;
@@ -67,11 +92,13 @@ body {
 
 #chuckPokemon {
   display: flex;
-  flex-direction: row; }
+  flex-direction: row;
+  justify-content: flex-end; }
 
 #dragonairCircle {
   width: 100px;
   height: 100px;
+  margin: 20px;
   background-color: #EBEBEB;
   border-style: ridge;
   border-color: #0081C6;
@@ -84,6 +111,7 @@ body {
 #butterfreeCircle {
   width: 100px;
   height: 100px;
+  margin: 20px;
   background-color: #EBEBEB;
   border-style: ridge;
   border-color: #0081C6;
@@ -96,6 +124,7 @@ body {
 #charmeleonCircle {
   width: 100px;
   height: 100px;
+  margin: 20px;
   background-color: #EBEBEB;
   border-style: ridge;
   border-color: #0081C6;
@@ -104,6 +133,58 @@ body {
   background-size: cover;
   -webkit-animation: rotation 2s infinite linear;
   background-image: url("images/charmeleon.jpg"); }
+
+.pokemonNames {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; }
+
+.names {
+  font-size: 25px;
+  font-family: "Andale Mono", AndaleMono,monospace;
+  font-style: bold;
+  color: #F7AF1D;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  overflow: hidden;
+  /* Ensures the content is not revealed until the animation */
+  border-right: .15em solid orange;
+  /* The typwriter cursor */
+  white-space: nowrap;
+  /* Keeps the content on a single line */
+  margin: 0 auto;
+  /* Gives that scrolling effect as the typing happens */
+  letter-spacing: .15em;
+  /* Adjust as needed */
+  animation: typing 3.5s steps(30, end), blink-caret 0.75s step-end infinite; }
+
+@keyframes typing {
+  from {
+    width: 0; }
+  to {
+    width: 100%; } }
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+  from,
+  to {
+    border-color: transparent; }
+  50% {
+    border-color: orange; } }
+
+.stats {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; }
+
+.statsBox {
+  height: 200px;
+  width: 400px;
+  border-radius: 25px;
+  border-width: 10px;
+  border-style: ridge;
+  border-color: #F7AF1D;
+  background-color: white; }
 
 @-webkit-keyframes rotation {
   from {
@@ -123,11 +204,11 @@ body {
 
 #vermillionHeader {
   font-size: 70px;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: "Andale Mono", AndaleMono,monospace;
   font-style: bold;
   color: #F7AF1D;
   padding-top: 30px;
-  padding-bottom: 40px;
+  padding-bottom: 10px;
   padding-left: 200px;
   overflow: hidden;
   /* Ensures the content is not revealed until the animation */
@@ -155,9 +236,5 @@ body {
   50% {
     border-color: orange; } }
 
-
-@-webkit-keyframes rotation {
-  from {
-    -webkit-transform: rotate(0deg); }
-  to {
-    -webkit-transform: rotate(359deg); } }
+.shadow {
+  text-shadow: 2px 2px 4px blue; }

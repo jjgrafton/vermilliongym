@@ -11,11 +11,11 @@
 
 #vermillionHeader {
     font-size: 70px;
-    font-family: 'Courier New', Courier, monospace;
+    font-family: "Andale Mono", AndaleMono,monospace;
     font-style: bold;
     color: $color;
     padding-top: 30px;
-    padding-bottom: 40px;
+    padding-bottom: 10px;
     padding-left: 200px;
     overflow: hidden;
     /* Ensures the content is not revealed until the animation */
@@ -52,3 +52,7 @@
         border-color: orange;
     }
 }
+
+.shadow {
+    text-shadow: 2px 2px 4px blue;
+ }
