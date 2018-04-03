@@ -209,14 +209,60 @@ window.onload = function (evt) {
     renderStats(characterObject, playerName);
 
     function renderStats(characterObject, playerName) {
-      let statsContainer;
-      if (playerName === 'professor') {
-        statsContainer = document.getElementById('professorStats');
-      } else if (playerName === 'chuck') {
-        statsContainer = document.getElementById('chuckStats');
-      }
+      const { stats } = characterObject;
+      console.log('stats: ', stats);
+      const statNames = Object.keys(stats);
+      console.log('statNames: ', statNames);
 
-      console.log('statsContainer: ', statsContainer);
+      // GET THE STATS WRAP DIV FROM THE DOM
+      let statsWrap;
+      if (playerName === 'professor') {
+        statsWrap = document.getElementById('professorStats');
+      } else if (playerName === 'chuck') {
+        statsWrap = document.getElementById('chuckStats');
+      }
+      console.log('statsWrap: ', statsWrap);
+
+      // start of pasted code here:
+      statNames.forEach((stat) => {
+        console.log(stat);
+        // make a statWrap for each stat and add everything to it:
+        const statWrap = document.createElement('div');
+        statWrap.classList.add('statWrap');
+        // statWrap.setAttribute('id', `${stat}Wrap`);
+        statWrap.setAttribute('id', 'statTitle');
+
+        const statLabel = document.createElement('div');
+        statLabel.setAttribute('id', 'statLabel');
+        statLabel.innerHTML = `${stat}:  `;
+        statWrap.appendChild(statLabel);
+
+        const statBarWrap = document.createElement('div');
+        statBarWrap.classList.add('statBarWrap');
+        // add boxes inside of the statBarWrap:
+        console.log('statBarWrap: ', statBarWrap);
+        for (let i = 0; i < stats[stat]; i++) {
+          // if (i < simpleStats[stat]) {
+          setTimeout(() => {
+            const statBox = document.createElement('div');
+            statBox.classList.add('statBox');
+            statBarWrap.appendChild(statBox);
+            if (i === stats[stat] - 1) {
+              setTimeout(() => {
+                const statNumberBox = document.createElement('div');
+                statNumberBox.classList.add('statNumberBox');
+                statNumberBox.innerHTML = stats[stat];
+                statBarWrap.appendChild(statNumberBox);
+              }, 20);
+            }
+          }, i * 20);
+          // }
+          statWrap.appendChild(statBarWrap);
+        }
+        // and end of loop:
+        statsWrap.appendChild(statWrap);
+      });
+      // start of original code here:
     }
     // render the stats:
   }
