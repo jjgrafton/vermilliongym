@@ -3,6 +3,12 @@
 
 window.onload = function (evt) {
   // CHARACTER CLASS, USED FOR OUR POKEMON
+  console.log('js file is connected and window loaded');
+  // console.log('local storage: ', localStorage);
+  // hard code our trainers in the local storage, because of "access-control-allow-origin" error:
+
+  const localDragonair = {};
+
   class Character {
     constructor(characterName, pic, gif, stats, abilities) {
       this.name = characterName;
@@ -27,13 +33,18 @@ window.onload = function (evt) {
         // has been a successful response:
         xhr.onload = function () {
           // notice that we are wrapping the data in the 'resolve' function, and this is the name of the parameter on line 19
+          // store the character object to the local storage, in case of an error on a future request:
+          localStorage.setItem(characterName, JSON.parse(xhr.responseText));
           resolve(JSON.parse(xhr.responseText));
         };
         // this is an event-listener.  When the 'onerror' event fires, it means that there
         // the response is an error
         xhr.onerror = function () {
-          // notice that we are wrapping the data in the 'reject' function, and this is the name of the parameter on line 19
-          reject(xhr.statusText);
+          console.log('local storage in the error event: ', localStorage);
+          resolve(localStorage[characterName]);
+          // because we are getting errors, if we get an error, we will instead find our character object in our local storage.
+          // instead of rejecting the error, we are resolving the data on the local storage.
+          // reject(xhr.statusText);
         };
       });
     }
@@ -94,10 +105,10 @@ window.onload = function (evt) {
           arrayOfCharacterObjects.forEach((characterObject) => {
             this.gym[characterObject.name] = characterObject;
           });
-          console.log(`${this.name}'s gym: `, this.gym);
+          // console.log(`${this.name}'s gym: `, this.gym);
         })
         .catch((err) => {
-          console.log(`error caught in the loadGym promise chain: ${err}`);
+          // console.log(`error caught in the loadGym promise chain: ${err}`);
         });
     }
     // made load gym a promise too, so that we can do things after the gyms are loaded:
@@ -116,7 +127,7 @@ window.onload = function (evt) {
             arrayOfCharacterObjects.forEach((characterObject) => {
               this.gym[characterObject.name] = characterObject;
             });
-            console.log(`${this.name}'s gym: `, this.gym);
+            // console.log(`${this.name}'s gym: `, this.gym);
             resolve(this.gym);
           })
           .catch((err) => {
@@ -136,13 +147,12 @@ window.onload = function (evt) {
   // promise chain to load both player's gym:
   chuck
     .loadGymPromise() // loading Chuck's gym
+    .then(gym =>
+        // console.log('chucks gym:', gym);
+        professorDoom.loadGymPromise(), // loading Professor Doom's gym
+    )
     .then((gym) => {
-      console.log('chucks gym:', gym);
-      return professorDoom.loadGymPromise(); // loading Professor Doom's gym
-    })
-    .then((gym) => {
-      console.log('professor dooms gym:', gym);
-
+      // console.log('professor dooms gym:', gym);
       // #NOTE-01:  right here, is where we need to make the page active, because the Pokemon have all arrived and are in their trainer's gym
       // Make all spinning icons in the html have an initial opacity of 0.5 or something?
       // In this part of the javascript, add a class to the icons that makes their opacity fade up and they start spinning?
@@ -161,23 +171,34 @@ window.onload = function (evt) {
   for (let i = 0; i < spinningButtons.length; i++) {
     const button = spinningButtons[i];
     button.addEventListener('click', () => {
+      // see what the character name is:
       const characterName = button.getAttribute('data');
-      // have do do this dynamically:
-      const playerName = 'chuck' || 'professor';
-      // in each button's event listener, we grab the character's name, and run
+      // see which Player owns that character
+      let characterOwner;
+      let characterObject;
+      if (professorDoom.gym[characterName]) {
+        console.log('the character belongs to professor');
+        characterOwner = professorDoom.name;
+        characterObject = professorDoom.gym[characterName];
+      } else if (chuck.gym[characterName]) {
+        console.log('the character belongs to chuck');
+        characterOwner = chuck.name;
+        characterObject = chuck.gym[characterName];
+      }
+
       // the render function on that character, in order to display it to the DOM:
-      renderCharacterToFloatingDisplay(characterName, playerName);
+      renderCharacterToFloatingDisplay(characterObject, characterOwner);
       // THIS is where we randomly select one of the other Trainer's pokemon, to display it, as well.
     });
   }
 
-  function renderCharacterToFloatingDisplay(characterName, playerName) {
-    // HERE, put function to remove previous character that was int eh DOM:
-    // displayStats
+  // holds and runs all of the functions for rendering to the floating display:
+  function renderCharacterToFloatingDisplay(characterObject, characterOwner) {
+    renderStats(characterObject, characterOwner);
 
-    // render the stats:
-    const professorStatsContainer = document.getElementsByClassName('professorStats')[0];
-    const chuckStatsContainer = document.getElementsByClassName('chuckStats')[0];
-    console.log(professorStatsContainer, chuckStatsContainer);
+    //
+    function renderStats(characterObject, characterOwner) {
+      console.log('in renderStats function: ', characterObject, characterOwner);
+    }
   }
 };
