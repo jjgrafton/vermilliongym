@@ -12,6 +12,29 @@
   -webkit-animation: rotation 2s infinite linear;
 }
 
+
+@mixin scoreBox {
+  height: 75px;
+  width: 75px;
+  margin-bottom: 0px;
+  background-color: #F8F9FC;
+  border-radius: 25px;
+  border-style: ridge;
+  border-color: #0081C6;
+  border-width: 7px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 50px;
+  text-align: center;
+  vertical-align: center;
+  color: #0081C6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+
+
 $cubic: cubic-bezier(0.785, 0.135, 0.15, 0.86);
 
 .flexContainer {
@@ -32,6 +55,7 @@ $cubic: cubic-bezier(0.785, 0.135, 0.15, 0.86);
   font-family: "Andale Mono", AndaleMono, monospace;
   color: #0081c6;
   text-align: center;
+
   webkit-animation: glow 2s ease-in-out infinite;
   animation: glow 2s ease-in-out infinite;
 }
@@ -40,6 +64,32 @@ $cubic: cubic-bezier(0.785, 0.135, 0.15, 0.86);
   50% {
     box-shadow: 0 0 60px #ffff33;
   }
+
+ /*  animation: pulse 1.5s infinite;
+  animation-direction: alternate; */
+  -webkit-animation: glow 2s ease-in-out infinite;
+  animation: glow 2s ease-in-out infinite;
+
+}
+
+ @keyframes pulse {
+  0% {
+    background-color: #fff;
+  }
+  100% {
+    background-color: #FFFF33;
+  }
+}
+
+@-webkit-keyframes glow 
+{
+  50% { box-shadow: 0 0 20px #aaf; }
+} 
+
+@keyframes glow 
+{
+  50% { box-shadow: 0 0 60px #FFFF33; }
+
 }
 
 #grimBox {
@@ -50,23 +100,6 @@ $cubic: cubic-bezier(0.785, 0.135, 0.15, 0.86);
   margin-right: 140px;
 }
 
-/* #grimName {
-  font-family: 'Courier New', Courier, monospace;
-  color: #0081C6;
-  font-size: 25px;
-  margin-left: 120px;
-  padding-top: 0px;
-  margin-top: 0px;
-}
-
-#chuckName {
-  font-family: 'Courier New', Courier, monospace;
-  color: #0081C6;
-  font-size: 25px;
-  margin-right: 175px;
-  padding-top: 0px;
-  margin-top: 0px;
-} */
 
 .scoreContainer {
   display: flex;
@@ -75,10 +108,9 @@ $cubic: cubic-bezier(0.785, 0.135, 0.15, 0.86);
 }
 
 .scoreBoxOne {
-  height: 75px;
-  width: 75px;
-  margin-bottom: 0px;
+  @include scoreBox;
   margin-left: 175px;
+
   background-color: #f8f9fc;
   border-radius: 25px;
   border-style: ridge;
@@ -92,13 +124,13 @@ $cubic: cubic-bezier(0.785, 0.135, 0.15, 0.86);
   display: flex;
   align-items: center;
   justify-content: center;
+
 }
 
 .scoreBoxTwo {
-  height: 75px;
-  width: 75px;
-  padding-top: 0px;
+  @include scoreBox;
   margin-right: 175px;
+
   background-color: #f8f9fc;
   border-radius: 25px;
   border-style: ridge;
@@ -112,6 +144,9 @@ $cubic: cubic-bezier(0.785, 0.135, 0.15, 0.86);
   align-items: center;
   justify-content: center;
 }
+
+
+
 
 .pokemonContainer {
   display: flex;
@@ -143,12 +178,14 @@ $cubic: cubic-bezier(0.785, 0.135, 0.15, 0.86);
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
+
 }
 
 #dragonairCircle {
   @include pokemonCircle;
   background-image: url("images/dragonair.jpg");
 }
+
 
 #butterfreeCircle {
   @include pokemonCircle;
@@ -159,6 +196,26 @@ $cubic: cubic-bezier(0.785, 0.135, 0.15, 0.86);
   @include pokemonCircle;
   background-image: url("images/charmeleon.jpg");
 }
+
+  #butterfreeCircle {
+    @include pokemonCircle;
+    background-image: url("images/butterfree.jpg");
+
+  }
+
+  #charmeleonCircle {
+    @include pokemonCircle;
+    background-image: url("images/charmeleon.jpg");
+
+  }
+
+  .pokemonNames {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+  }
+
 
 .pokemonNames {
   display: flex;
@@ -188,6 +245,7 @@ $cubic: cubic-bezier(0.785, 0.135, 0.15, 0.86);
   animation: typing 3.5s steps(30, end), blink-caret 0.75s step-end infinite;
 }
 
+
 @keyframes typing {
   from {
     width: 0;
@@ -209,10 +267,12 @@ $cubic: cubic-bezier(0.785, 0.135, 0.15, 0.86);
   }
 }
 
+
 .stats {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+
 }
 
 .statsBox {
@@ -223,7 +283,11 @@ $cubic: cubic-bezier(0.785, 0.135, 0.15, 0.86);
   border-style: ridge;
   border-color: $color;
   background-color: white;
+
   webkit-animation: glow 2s ease-in-out infinite;
+
+  -webkit-animation: glow 2s ease-in-out infinite;
+
   animation: glow 2s ease-in-out infinite;
 }
 

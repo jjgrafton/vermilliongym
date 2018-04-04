@@ -25,9 +25,15 @@ body {
 }
 
 .statBox {
+
   background-color: #dc3737;
   border-radius: 3px;
   /* border: solid #b8860b 1px; */
+
+  background-color: #DC3737;
+  border-radius: 3px;
+  border: solid #B8860B 1px;
+
   animation-name: statFadeIn;
   animation-duration: 1000ms;
   animation-direction: forwards;
@@ -59,11 +65,13 @@ body {
 }
 
 #statLabel {
+
   font-family: "Andale Mono", AndaleMono, monospace;
   /* font-weight: 400; */
   font-size: 15px;
   margin-left: 15px;
   color: #0081c6;
+
   /* text-shadow: -5px 0 white, 0 1px white, 1px 0 white, 0 -1px white; */
   /* color: white; */
 
