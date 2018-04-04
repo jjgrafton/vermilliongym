@@ -1,3 +1,6 @@
+
+/* @import url("reset.css"); */
+@import url("stats.css");
 body {
   background-color: #DC3737; }
 
@@ -18,6 +21,13 @@ body {
   font-family: "Andale Mono", AndaleMono,monospace;
   color: #0081C6;
   text-align: center;
+  webkit-animation: glow 2s ease-in-out infinite;
+  animation: glow 2s ease-in-out infinite;
+}
+
+@keyframes glow {
+  50% {
+    box-shadow: 0 0 60px #ffff33;
   /*  animation: pulse 1.5s infinite;
   animation-direction: alternate; */
   -webkit-animation: glow 2s ease-in-out infinite;
@@ -191,8 +201,34 @@ body {
 .pokemonNames {
   display: flex;
   flex-direction: row;
-  justify-content: space-between; }
 
+  justify-content: space-between;
+}
+/* pasted code starts here: */
+.textAnimation {
+  font-size: 25px;
+  font-family: "Andale Mono", AndaleMono, monospace;
+  font-style: bold;
+  color: #f7af1d;
+  text-shadow: 2px 2px 4px #b8860b;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  overflow: hidden;
+  /* Ensures the content is not revealed until the animation */
+  border-right: 0.15em solid orange;
+  /* The typwriter cursor */
+  white-space: nowrap;
+  /* Keeps the content on a single line */
+  margin: 0 auto;
+  /* Gives that scrolling effect as the typing happens */
+  letter-spacing: 0.15em;
+  /* Adjust as needed */
+  animation: typing 3.5s steps(30, end), blink-caret 0.75s step-end infinite;
+}
+
+
+
+/* pasted code ends here */
 .names {
   font-size: 25px;
   font-family: "Andale Mono", AndaleMono,monospace;
@@ -219,15 +255,27 @@ body {
   justify-content: space-between; }
 
 .statsBox {
+
+  padding-top: 10px;
+  height: 250px;
+  width: 475px;
+
   height: 250px;
   width: 400px;
+
   border-radius: 25px;
   border-width: 10px;
   border-style: ridge;
   border-color: #F7AF1D;
   background-color: white;
+
+  webkit-animation: glow 2s ease-in-out infinite;
+  animation: glow 2s ease-in-out infinite;
+}
+
   -webkit-animation: glow 2s ease-in-out infinite;
   animation: glow 2s ease-in-out infinite; }
+
 
 @-webkit-keyframes rotation {
   from {
