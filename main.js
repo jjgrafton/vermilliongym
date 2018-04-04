@@ -67,7 +67,7 @@ window.onload = function (evt) {
     charmeleon:
       'https://orig00.deviantart.net/5293/f/2016/030/b/7/charmeleon_gif_by_queenaries-d9px7h5.gif',
   };
-
+  // PLAYER CLASS USED FOR OUR TRAINERS
   class Player {
     constructor(playerName, charactersArray) {
       this.name = playerName;
@@ -109,16 +109,14 @@ window.onload = function (evt) {
       // console.log('chucks gym:', gym);
       professorDoom.loadGymPromise())
     .then((gym) => {
-      // #NOTE:  right here, is where we need to make visual cues, that make the page active, because the Pokemon have all arrived and are in their trainer's gym
+      // #NOTE:  right here, is where we need to make visual cues, that make the page active, because the Pokemon have all arrived and are in their trainers' gyms.
     })
     .catch((err) => {
       console.log(`error caught in loadGymPromise chain: ${err}`);
     });
 
-  // #NOTE:
   // After all of the above code has run, the page should now appear active.
   // CODE FOR THEN MANIPULATING AND RENDERING TO THE DOM:
-
   // select the spinning icons and add an 'click' event-listener to them:
   const spinningButtons = document.getElementsByClassName('spinningButton');
   for (let i = 0; i < spinningButtons.length; i++) {
